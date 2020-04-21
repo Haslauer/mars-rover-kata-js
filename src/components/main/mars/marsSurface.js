@@ -4,7 +4,7 @@ import {RockElement, SurfaceElement, TargetElement, RoverElement} from "./surfac
 import {Position} from "../position";
 
 const SIDE_LENGTH = 8;
-const OBSTACLE_COUNT = 8;
+const OBSTACLE_COUNT = 16;
 
 export class MarsSurface extends React.Component {
     constructor(props) {
@@ -54,6 +54,15 @@ export class MarsSurface extends React.Component {
             roverPosition: rover.position
         });
     };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.isObstacle(this.rover.position)) {
+            setTimeout(() => alert("The rover is broken. You crashed a rock!"), 200);
+        }
+        if (this.rover.position.equals(this.target)) {
+            setTimeout(()=> alert("Congratulations, you made it to the target."), 200);
+        }
+    }
 
     elementForPos(position) {
         if (position.equals(this.state.roverPosition)) {
