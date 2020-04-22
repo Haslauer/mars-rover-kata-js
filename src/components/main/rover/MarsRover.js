@@ -1,6 +1,9 @@
 import {Position} from "../position";
+import {CircularState} from "./circularState";
 
 export class MarsRover {
+    static cardinalDirections = new CircularState(['N', 'E', 'S', 'W']);
+
     constructor() {
         this.direction = 'N';
         this.position = new Position(0, 0);
@@ -22,36 +25,38 @@ export class MarsRover {
 
     executeNext(nextCommand) {
         if (nextCommand === 'L') {
-            if (this.direction === 'N') {
-                this.direction = 'W';
-            } else if (this.direction === 'S') {
-                this.direction = 'E';
-            } else if (this.direction === 'E') {
-                this.direction = 'N';
-            } else if (this.direction === 'W') {
-                this.direction = 'S';
-            }
+            this.turnLeft();
         } else if (nextCommand === 'R') {
-            if (this.direction === 'N') {
-                this.direction = 'E';
-            } else if (this.direction === 'S') {
-                this.direction = 'W';
-            } else if (this.direction === 'E') {
-                this.direction = 'S';
-            } else if (this.direction === 'W') {
-                this.direction = 'N';
-            }
+            this.turnRight();
         } else if (nextCommand === 'M') {
             let p = this.position;
             if (this.direction === 'N') {
-                this.position = new Position(p.x - 1, p.y);
+                this.position = new Position(this.mapTo8Elements(p.x - 1), p.y);
             } else if (this.direction === 'S') {
-                this.position = new Position(p.x + 1, p.y);
+                this.position = new Position(this.mapTo8Elements(p.x + 1), p.y);
             } else if (this.direction === 'E') {
-                this.position = new Position(p.x, p.y + 1);
+                this.position = new Position(p.x, this.mapTo8Elements(p.y + 1));
             } else if (this.direction === 'W') {
-                this.position = new Position(p.x, p.y - 1);
+                this.position = new Position(p.x, this.mapTo8Elements(p.y - 1));
             }
         }
+    }
+
+    mapTo8Elements(value) {
+        if (value < 0) {
+            return value + 8;
+        }
+        if (value > 7) {
+            return value - 8;
+        }
+        return value;
+    }
+
+    turnRight() {
+        this.direction = MarsRover.cardinalDirections.clockwise(this.direction);
+    }
+
+    turnLeft() {
+        this.direction = MarsRover.cardinalDirections.counterclockwise(this.direction);
     }
 }

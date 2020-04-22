@@ -13,7 +13,7 @@ describe('The Mars Rover', () => {
         let rover = new MarsRover();
         beforeEach(() => {
             rover.direction = 'N';
-            rover.position = new Position(3,3);
+            rover.position = new Position(3, 3);
         });
 
         it('handles the turn left command', () => {
@@ -28,7 +28,7 @@ describe('The Mars Rover', () => {
 
         it('handles the move command', () => {
             rover.executeNext('M');
-            expect(rover.position).toEqual(new Position(2,3));
+            expect(rover.position).toEqual(new Position(2, 3));
         });
     });
 
@@ -50,7 +50,7 @@ describe('The Mars Rover', () => {
 
         it('handles the move command', () => {
             rover.executeNext('M');
-            expect(rover.position).toEqual(new Position(4,3));
+            expect(rover.position).toEqual(new Position(4, 3));
         });
     });
 
@@ -72,7 +72,7 @@ describe('The Mars Rover', () => {
 
         it('handles the move command', () => {
             rover.executeNext('M');
-            expect(rover.position).toEqual(new Position(3,4));
+            expect(rover.position).toEqual(new Position(3, 4));
         });
     });
 
@@ -94,9 +94,44 @@ describe('The Mars Rover', () => {
 
         it('handles the move command', () => {
             rover.executeNext('M');
-            expect(rover.position).toEqual(new Position(3,2));
+            expect(rover.position).toEqual(new Position(3, 2));
         });
     });
+    describe('when moving out of the surface appear on the other side', () => {
+        let rover = new MarsRover();
+
+        it('works for moving north from (0,0)', () => {
+            rover.direction = 'N';
+            rover.position = new Position(0, 0);
+
+            rover.executeNext('M');
+            expect(rover.position).toEqual(new Position(7, 0));
+        });
+
+        it('works for moving west from (0,0)', () => {
+            rover.direction = 'W';
+            rover.position = new Position(0, 0);
+
+            rover.executeNext('M');
+            expect(rover.position).toEqual(new Position(0, 7));
+        });
+
+        it('works for moving east from (0,7)', () => {
+            rover.direction = 'E';
+            rover.position = new Position(0, 7);
+
+            rover.executeNext('M');
+            expect(rover.position).toEqual(new Position(0, 0));
+        });
+
+        it('works for moving south from (7,0)', () => {
+            rover.direction = 'S';
+            rover.position = new Position(7, 0);
+
+            rover.executeNext('M');
+            expect(rover.position).toEqual(new Position(0, 0));
+        });
+    })
 });
 
 
