@@ -29,17 +29,23 @@ export class MarsRover {
         } else if (nextCommand === 'R') {
             this.turnRight();
         } else if (nextCommand === 'M') {
-            let p = this.position;
             if (this.direction === 'N') {
-                this.position = new Position(this.mapTo8Elements(p.x - 1), p.y);
+                this.addRelativePosition(new Position(-1,0))
             } else if (this.direction === 'S') {
-                this.position = new Position(this.mapTo8Elements(p.x + 1), p.y);
+                this.addRelativePosition(new Position(1,0))
             } else if (this.direction === 'E') {
-                this.position = new Position(p.x, this.mapTo8Elements(p.y + 1));
+                this.addRelativePosition(new Position(0,1))
             } else if (this.direction === 'W') {
-                this.position = new Position(p.x, this.mapTo8Elements(p.y - 1));
+                this.addRelativePosition(new Position(0,-1));
             }
         }
+    }
+
+    addRelativePosition(diff){
+        this.position = new Position(
+            this.mapTo8Elements(diff.x + this.position.x),
+            this.mapTo8Elements(diff.y + this.position.y)
+        )
     }
 
     mapTo8Elements(value) {
