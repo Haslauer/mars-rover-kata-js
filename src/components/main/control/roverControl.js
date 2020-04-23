@@ -1,4 +1,5 @@
 import React from "react";
+import "./roverControl.css";
 
 export class RoverControl extends React.Component {
     constructor(props) {
@@ -9,12 +10,12 @@ export class RoverControl extends React.Component {
         }
     }
 
-    addCommand(command){
+    addCommand(command) {
         const {commands} = this.state;
         this.setState({commands: commands + command})
     }
-    
-    clearCommands(){
+
+    clearCommands() {
         this.setState({commands: ''})
     }
 
@@ -37,17 +38,17 @@ export class RoverControl extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className='commands'>
-                    <button onClick={this.move}>Move</button>
-                    <button onClick={this.turnLeft}>Left</button>
-                    <button onClick={this.turnRight}>Right</button>
-                </div>
+            <div className='commandsContainer'>
                 <div>
+                    <div className='commands'>
+                        <button onClick={this.move}>Move</button>
+                        <button onClick={this.turnLeft}>Left</button>
+                        <button onClick={this.turnRight}>Right</button>
+                    </div>
                     <input type="text" readOnly value={this.state.commands}/>
                 </div>
                 <div className="execute">
-                    <button onClick={this.execute}>Execute</button>
+                    <button className="executeButton" onClick={this.execute}>Execute</button>
                 </div>
             </div>);
     }

@@ -6,7 +6,8 @@
     list-style: none;
     max-width: 800px;
     margin: 40px auto;
-    padding: 0;
+    padding-right: 14px;
+    box-shadow: 0 0 20px 20px #9a5e3f;
 }
 
 .surface-elem {

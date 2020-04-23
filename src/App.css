@@ -1,6 +1,8 @@
-
-.main {
-  background-color: rgb(255, 252, 145);
+body {
+  background-color: rgb(221, 146, 88);
+  background-image: url("space.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .App {

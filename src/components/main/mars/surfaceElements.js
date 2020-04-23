@@ -30,7 +30,7 @@ export function RoverElement(props) {
     const rotation = directions[props.direction];
     return (
         <div className="surface-elem">
-            <img src={require('./rover.png')}
+            <img src={require('./walle.jpg')}
                  style={{transform: `rotate(${rotation})`}}
                  alt="img-surface"
                  className="img-surface"/>

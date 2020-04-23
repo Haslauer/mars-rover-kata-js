@@ -5,14 +5,21 @@
 .pic {
     flex: 10%;
 }
+
 .headline {
     flex: 80%;
     color: rgb(255, 255, 255);
     background-color: #070ac2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
 }
+
 #logo1{
     width:100%;
 }
+
 #logo2{
     width:100%;
 }
